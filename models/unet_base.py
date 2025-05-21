@@ -312,7 +312,7 @@ class Unet(nn.Module):
 
         self.downs = nn.ModuleList([])
         for i in range(len(self.down_channels) - 1):
-            self.downs.append(DownBlock(self.mid_channels[i], self.down_channels[i + 1], self.t_emb_dim,
+            self.downs.append(DownBlock(self.down_channels[i], self.down_channels[i + 1], self.t_emb_dim,
                                         down_sample=self.down_sample[i], num_layers=self.num_down_layers))
 
         self.mids = nn.ModuleList([])
