@@ -142,7 +142,7 @@ class FIDEvaluation:
 
 
 if __name__ == '__main__':
-    evaluator = FIDEvaluation(batch_size=64, config_path='config/default.yaml')
+    evaluator = FIDEvaluation(batch_size=128, config_path='config/default.yaml', num_fid_samples=5000)
 
     fid_value = evaluator.fid_score()
     print(f'FID: {fid_value:.2f}')
