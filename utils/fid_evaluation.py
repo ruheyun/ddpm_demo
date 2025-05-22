@@ -45,6 +45,7 @@ class FIDEvaluation:
         self.model_config = config['model_params']
         self.train_config = config['train_params']
         self.diffusion_config = config['diffusion_params']
+        self.dataset_config = config['dataset_params']
 
         # Load model
         self.model = Unet(self.model_config).to(self.device)
