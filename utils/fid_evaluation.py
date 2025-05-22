@@ -119,7 +119,7 @@ class FIDEvaluation:
         stacked_fake_features = []
         self.print_fn(f'Stacking Inception features for {self.n_samples} generated samples.')
         for batch in tqdm(batches):
-            fake_samples = self.sample(batch_size=batch)
+            fake_samples = self.sample(batch_size=batch).to(self.device)
             fake_features = self.calculate_inception_features(fake_samples)
             stacked_fake_features.append(fake_features)
         stacked_fake_features = torch.cat(stacked_fake_features, dim=0).cpu().numpy()
