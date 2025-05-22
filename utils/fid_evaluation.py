@@ -94,9 +94,10 @@ class FIDEvaluation:
             self.print_fn(f"Stacking Inception features for {self.n_samples} samples from the real dataset.")
             mnist = MnistDataset('train', im_path=self.dataset_config['im_path'])
             mnist_loader = DataLoader(mnist, batch_size=self.train_config['batch_size'], shuffle=True, num_workers=4)
+            mnist_iter = iter(mnist_loader)
             for _ in tqdm(range(num_batches)):
                 try:
-                    real_samples = next(mnist_loader)
+                    real_samples = next(mnist_iter)
                 except StopIteration:
                     break
                 real_samples = real_samples.to(self.device)
