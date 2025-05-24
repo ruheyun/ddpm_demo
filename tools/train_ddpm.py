@@ -13,9 +13,9 @@ from models.unet_base import Unet
 from scheduler.linear_noise_scheduler import LinearNoiseScheduler
 
 
-import torch_xla.core.xla_model as xm
-device = xm.xla_device()
-# device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+# import torch_xla.core.xla_model as xm
+# device = xm.xla_device()
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
 def train(args):
@@ -80,8 +80,8 @@ def train(args):
             loss = criterion(noise_pred, noise)
             losses.append(loss.detach().cpu().item())
             loss.backward()
-            # optimizer.step()
-            xm.optimizer_step(optimizer)
+            optimizer.step()
+            # xm.optimizer_step(optimizer)
 
         print(f'Finished epoch: {epoch_idx + 1} | Loss: {np.mean(losses): .4f}')
         torch.save(model.cpu().state_dict(), fill_path)
